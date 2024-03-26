@@ -1,18 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
-public class Tile : MonoBehaviour
+public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool isGray, isSelected;
+
+    private void Start()
     {
-        
+        if (isGray)
+            GetComponent<SpriteRenderer>().color = Color.black;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        if (isSelected) return;
+
+        GetComponent<SpriteRenderer>().color = Color.blue;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (isSelected) return;
+
+        if (isGray)
+            GetComponent<SpriteRenderer>().color = Color.black;
+        else
+            GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        isSelected = !isSelected;
+
+        if (isSelected)
+            GetComponent<SpriteRenderer>().color = Color.red;
+        else
+            GetComponent<SpriteRenderer>().color = Color.blue;
     }
 }
