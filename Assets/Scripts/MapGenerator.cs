@@ -6,7 +6,7 @@ public class MapGenerator : MonoBehaviour
 
     internal Tile[,] tiles;
 
-    [SerializeField] private int Width = 16;
+    [SerializeField] private int Width = 17;
     [SerializeField] private int Height = 7;
 
     private void Start()
@@ -15,7 +15,7 @@ public class MapGenerator : MonoBehaviour
         GenerateMap(Width, Height);
     }
 
-    private void GenerateMap(int width, int height)
+    public void GenerateMap(int width, int height)
     {
         float posX, posY;
         bool isGray;

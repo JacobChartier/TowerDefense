@@ -35,9 +35,15 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         isSelected = !isSelected;
 
-        if (isSelected)
-            GetComponent<SpriteRenderer>().color = Color.red;
-        else
+        if (eventData.button == PointerEventData.InputButton.Right)
+            if (isSelected)
+                GetComponent<SpriteRenderer>().color = Color.magenta;
+
+        if (eventData.button == PointerEventData.InputButton.Left)
+            if (isSelected)
+                GetComponent<SpriteRenderer>().color = Color.yellow;
+
+        if (!isSelected)
             GetComponent<SpriteRenderer>().color = Color.blue;
     }
 }
