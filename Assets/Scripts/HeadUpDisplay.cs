@@ -9,6 +9,7 @@ public class HeadUpDisplay : MonoBehaviour
 
     private void Start()
     {
-        levelLabel.text = $"Level #{LevelManager.CurrentLevel}";
+        levelLabel.text = $"Level: {LevelManager.CurrentLevel}";
+        gameObject.GetComponent<MapGenerator>().GenerateMap(LevelManager.MapWidth, LevelManager.MapHeight, new Vector2(0, -0.5f));
     }
 }

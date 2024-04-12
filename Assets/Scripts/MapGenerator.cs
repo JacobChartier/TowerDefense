@@ -9,13 +9,12 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private int Width = 17;
     [SerializeField] private int Height = 7;
 
-    private void Start()
+    private void Awake()
     {
         prefab = Resources.Load<GameObject>("Prefabs/Tile");
-        GenerateMap(Width, Height);
     }
 
-    public void GenerateMap(int width, int height)
+    public void GenerateMap(int width, int height, Vector2 offset)
     {
         float posX, posY;
         bool isGray;
@@ -24,11 +23,11 @@ public class MapGenerator : MonoBehaviour
 
         for (int x = 0; x < width; x++)
         {
-            posX = x - ((float)(width - 1) / 2);
+            posX = x - ((float)(width - 1) / 2) + offset.x;
 
             for (int y = 0; y < height; y++)
             {
-                posY = y - ((float)(height - 1) / 2);
+                posY = y - ((float)(height - 1) / 2) + offset.y;
 
                 GameObject tile = Instantiate(prefab, new Vector3(posX, posY, 0), Quaternion.identity);
                 tile.name = $"Tile (X {posX}, Y {posY})";

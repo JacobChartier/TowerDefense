@@ -6,12 +6,17 @@ using UnityEngine.UIElements;
 
 public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
+    private Color darkTileColor = new Color(0.05f, 0.05f, 0.05f, 1.0f);
+    private Color lightTileColor = new Color(0.15f, 0.15f, 0.15f, 1.0f);
+
     public bool isGray, isSelected;
 
     private void Start()
     {
         if (isGray)
-            GetComponent<SpriteRenderer>().color = Color.black;
+            GetComponent<SpriteRenderer>().color = darkTileColor;
+        else
+            GetComponent<SpriteRenderer>().color = lightTileColor;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -26,9 +31,9 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         if (isSelected) return;
 
         if (isGray)
-            GetComponent<SpriteRenderer>().color = Color.black;
+            GetComponent<SpriteRenderer>().color = darkTileColor;
         else
-            GetComponent<SpriteRenderer>().color = Color.white;
+            GetComponent<SpriteRenderer>().color = lightTileColor;
     }
 
     public void OnPointerDown(PointerEventData eventData)

@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
+        if (Instance != null)
+            return;
+
             Instance = this;
-        else 
-            Destroy(this);
 
         DontDestroyOnLoad(Instance);
     }
