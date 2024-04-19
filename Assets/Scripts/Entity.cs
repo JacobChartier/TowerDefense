@@ -1,14 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public int MaxHealthPoints { get; private set; } = 10;
-    public int HealthPoints { get; private set; } = 8;
-
-    public void AddHealthPoints(int amount)
-    {
-        HealthPoints += amount;
-    }
+    public Statistic<int> Health = new(10, 10);
+    public Statistic<int> Defense = new(2, 2);
+    public Statistic<float> Speed = new(1.0f, 5.0f);
 }
