@@ -14,13 +14,15 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private Color lightPathTileColor = new Color(1.0f, 1.0f, 0.4f, 1.0f);
     private Color darkPathTileColor = new Color(0.8f, 0.8f, 0.3f, 1.0f);
 
-    public bool isGray, isSelected, isPath;
+    public bool isGray, isWall, isTower, isPath;
 
     private Sprite wallSprite;
+    private GameObject pref;
 
     private void Start()
     {
         wallSprite = Resources.Load<Sprite>("Sprites/Wall");
+        pref = GameObject.Find("Tile Selector");
 
         if (isGray)
             GetComponent<SpriteRenderer>().color = darkTileColor;
@@ -68,13 +70,22 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         GameManager.Instance.TargetTile = this;
 
-        if (isSelected) return;
+        if (isWall)
+            pref.gameObject.SetActive(true);
+        pref.transform.SetParent(TileManager.Instance.tiles[X, Y].transform);
+        pref.gameObject.transform.position = new Vector2(X - 8, Y - 4);
+
+        if (isWall) return;
+
         GetComponent<SpriteRenderer>().color = Color.blue;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (isSelected) return;
+        pref.gameObject.SetActive(false);
+
+
+        if (isWall) return;
 
         if (isGray)
             GetComponent<SpriteRenderer>().color = darkTileColor;
@@ -84,22 +95,22 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        isSelected = !isSelected;
+        isWall = !isWall;
 
         Reset();
 
         if (eventData.button == PointerEventData.InputButton.Right)
-            if (isSelected)
+            if (isWall)
                 GetComponent<SpriteRenderer>().color = Color.magenta;
 
         if (eventData.button == PointerEventData.InputButton.Left)
-            if (isSelected)
+            if (isWall)
             {
                 GetComponent<SpriteRenderer>().sprite = wallSprite;
                 GetComponent<SpriteRenderer>().color = Color.white;
             }
 
-        if (!isSelected)
+        if (!isWall)
             GetComponent<SpriteRenderer>().color = Color.blue;
     }
 }

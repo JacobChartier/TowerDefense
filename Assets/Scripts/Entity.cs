@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour
 {
     public Statistic<int> Health = new(10, 10);
     public Statistic<int> Defense = new(2, 2);

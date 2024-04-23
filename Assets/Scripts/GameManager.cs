@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (var t in GameObject.Find("Level Loader").GetComponent<TileManager>().tiles)
             {
-                if (t.isSelected) continue;
+                if (t.isWall) continue;
 
                 t.SetPath(false);
             }

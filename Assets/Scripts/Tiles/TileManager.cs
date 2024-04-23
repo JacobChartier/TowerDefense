@@ -85,7 +85,7 @@ public class TileManager : MonoBehaviour
 
             foreach (var v in FindNeighbor(u))
             {
-                if (!Q.Contains(v) || v.isSelected)
+                if (!Q.Contains(v) || v.isWall)
                     continue;
 
                 var alt = dist[u] + 1;

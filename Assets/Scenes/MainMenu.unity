@@ -1511,6 +1511,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ff45d9df20adf4387bdce12c95e14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTile: {fileID: 0}
+  pathToGoal: []
 --- !u!4 &1709393520
 Transform:
   m_ObjectHideFlags: 0

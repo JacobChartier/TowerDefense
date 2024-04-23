@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     public static int CurrentLevel { get; private set; } = 0;
+    public static int CurrentWave { get; private set; } = 0;
     public static int MapWidth { get; private set; } = 0;
     public static int MapHeight { get; private set; } = 0;
 
@@ -77,6 +78,11 @@ public class LevelManager : MonoBehaviour
 
         Player.posX = UnityEngine.Random.Range(0, MapWidth);
         Player.posY = UnityEngine.Random.Range(0, MapHeight);
+    }
+
+    public void StartWave()
+    {
+        CurrentLevel += 1;
     }
 }
 
