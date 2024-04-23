@@ -2401,8 +2401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health:
-    Current: 0
-    MaxValue: 0
+    Current: 5
+    MaxValue: 10
   Defense:
     Current: 0
     MaxValue: 0
@@ -3424,6 +3424,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelLabel: {fileID: 2145660969}
+  healthText: {fileID: 900055090}
+  healthSlider: {fileID: 453303423}
 --- !u!4 &1822573081
 Transform:
   m_ObjectHideFlags: 0
