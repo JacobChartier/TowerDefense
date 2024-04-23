@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -10,6 +11,8 @@ public class LevelManager : MonoBehaviour
     public static int CurrentLevel { get; private set; } = 0;
     public static int MapWidth { get; private set; } = 0;
     public static int MapHeight { get; private set; } = 0;
+
+    public static GameObject playerPrefab;
 
     private void Awake()
     {
@@ -26,7 +29,9 @@ public class LevelManager : MonoBehaviour
         switch (level)
         {
             case 0:
+
                 CurrentLevel = 0;
+
                 break;
 
             case 1:
@@ -69,6 +74,9 @@ public class LevelManager : MonoBehaviour
 
                 break;
         }
+
+        Player.posX = UnityEngine.Random.Range(0, MapWidth);
+        Player.posY = UnityEngine.Random.Range(0, MapHeight);
     }
 }
 

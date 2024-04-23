@@ -12,9 +12,39 @@ public class GameManager : MonoBehaviour
         if (Instance != null)
             return;
 
-            Instance = this;
+        Instance = this;
 
         DontDestroyOnLoad(Instance);
+    }
+
+    public Tile spawnTile;
+    public Tile TargetTile { get; internal set; }
+    [SerializeField] List<Tile> pathToGoal = new List<Tile>();
+
+    private void Update()
+    {
+        if (spawnTile != TileManager.Instance.tiles[Player.posX, Player.posY])
+            spawnTile = TileManager.Instance.tiles[Player.posX, Player.posY];
+
+        if (Input.GetKeyUp(KeyCode.Space) && TargetTile != null)
+        {
+            foreach (var t in GameObject.Find("Level Loader").GetComponent<TileManager>().tiles)
+            {
+                if (t.isSelected) continue;
+
+                t.SetPath(false);
+            }
+
+            var path = GameObject.Find("Level Loader").GetComponent<TileManager>().PathFinding(spawnTile, TargetTile);
+            var tile = TargetTile;
+
+            while (tile != null)
+            {
+                pathToGoal.Add(tile);
+                tile.isPath = true;
+                tile = path[tile];
+            }
+        }
     }
 
     public void SwitchScene(string name)

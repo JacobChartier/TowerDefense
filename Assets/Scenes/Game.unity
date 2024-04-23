@@ -1755,7 +1755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0/0 <color=#FF4343>HP</color>
+  m_text: ' /  <color=#FF4343>HP</color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2928fdeb7ef6fc449d7cccbfc3cd0a0, type: 2}
   m_sharedMaterial: {fileID: 1328030439039624040, guid: d2928fdeb7ef6fc449d7cccbfc3cd0a0, type: 2}
@@ -1798,7 +1798,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -1943,7 +1943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 235, y: -15}
+  m_AnchoredPosition: {x: 250, y: -15}
   m_SizeDelta: {x: 80, y: 25}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1083213253
@@ -2404,11 +2404,11 @@ MonoBehaviour:
     Current: 5
     MaxValue: 10
   Defense:
-    Current: 0
-    MaxValue: 0
+    Current: 2
+    MaxValue: 2
   Speed:
-    Current: 0
-    MaxValue: 0
+    Current: 1
+    MaxValue: 5
 --- !u!4 &1201157343
 Transform:
   m_ObjectHideFlags: 0
@@ -2551,7 +2551,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 135, y: -15}
-  m_SizeDelta: {x: 85, y: 25}
+  m_SizeDelta: {x: 100, y: 25}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1257691974
 MonoBehaviour:
@@ -2916,7 +2916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Wave: 0'
+  m_text: 'Wave: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2928fdeb7ef6fc449d7cccbfc3cd0a0, type: 2}
   m_sharedMaterial: {fileID: 1328030439039624040, guid: d2928fdeb7ef6fc449d7cccbfc3cd0a0, type: 2}
@@ -3605,6 +3605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ff45d9df20adf4387bdce12c95e14c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTile: {fileID: 0}
+  pathToGoal: []
 --- !u!4 &2003629392
 Transform:
   m_ObjectHideFlags: 0
@@ -3688,7 +3690,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Level: 0'
+  m_text: 'Level: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2928fdeb7ef6fc449d7cccbfc3cd0a0, type: 2}
   m_sharedMaterial: {fileID: 1328030439039624040, guid: d2928fdeb7ef6fc449d7cccbfc3cd0a0, type: 2}
@@ -3971,7 +3973,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1484575242454748021, guid: a9acb67b6a19b844da3bef638fc49d16, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

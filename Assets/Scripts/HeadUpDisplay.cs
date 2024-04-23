@@ -18,6 +18,6 @@ public class HeadUpDisplay : MonoBehaviour
         healthSlider.maxValue = Player.Instance.Health.MaxValue;
         healthSlider.value = Player.Instance.Health.Current;
 
-        gameObject.GetComponent<MapGenerator>().GenerateMap(LevelManager.MapWidth, LevelManager.MapHeight, new Vector2(0, -0.5f));
+        gameObject.GetComponent<TileManager>().GenerateMap(LevelManager.MapWidth, LevelManager.MapHeight, new Vector2(0, -0.5f));
     }
 }
