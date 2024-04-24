@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public Tile spawnTile;
     public Tile TargetTile { get; internal set; }
-    [SerializeField] List<Tile> pathToGoal = new List<Tile>();
+    public List<Tile> pathToGoal = new();
 
     private void Update()
     {

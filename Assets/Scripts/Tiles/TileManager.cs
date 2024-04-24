@@ -8,8 +8,8 @@ public class TileManager : MonoBehaviour
 
     internal Tile[,] tiles;
 
-    [SerializeField] private int Width = 17;
-    [SerializeField] private int Height = 7;
+    [SerializeField] private int Width;
+    [SerializeField] private int Height;
 
     private void Awake()
     {
@@ -22,6 +22,9 @@ public class TileManager : MonoBehaviour
     {
         float posX, posY;
         bool isGray;
+
+        Width = width;
+        Height = height;
 
         tiles = new Tile[width, height];
 
@@ -114,7 +117,7 @@ public class TileManager : MonoBehaviour
         if (u.Y - 1 >= 0)
             output.Add(tiles[u.X, (u.Y - 1)]);
 
-        if (u.Y + 1 <= Height)
+        if (u.Y + 1 < Height)
             output.Add(tiles[u.X, (u.Y + 1)]);
 
         return output;

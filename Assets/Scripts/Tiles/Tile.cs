@@ -9,10 +9,10 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     public int X { get; internal set; }
     public int Y { get; internal set; }
 
-    private Color darkTileColor = new Color(0.05f, 0.05f, 0.05f, 1.0f);
-    private Color lightTileColor = new Color(0.15f, 0.15f, 0.15f, 1.0f);
-    private Color lightPathTileColor = new Color(1.0f, 1.0f, 0.4f, 1.0f);
-    private Color darkPathTileColor = new Color(0.8f, 0.8f, 0.3f, 1.0f);
+    private Color darkTileColor = new(0.05f, 0.05f, 0.05f, 1.0f);
+    private Color lightTileColor = new(0.15f, 0.15f, 0.15f, 1.0f);
+    private Color darkPathTileColor = new(0.8f, 0.8f, 0.3f, 1.0f);
+    private Color lightPathTileColor = new(1.0f, 1.0f, 0.4f, 1.0f);
 
     public bool isGray, isWall, isTower, isPath;
 
@@ -71,9 +71,9 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
         GameManager.Instance.TargetTile = this;
 
         if (isWall)
-            pref.gameObject.SetActive(true);
+            pref.SetActive(true);
         pref.transform.SetParent(TileManager.Instance.tiles[X, Y].transform);
-        pref.gameObject.transform.position = new Vector2(X - 8, Y - 4);
+        pref.transform.position = new Vector2(X - Mathf.Ceil(LevelManager.MapWidth / 2), Y - Mathf.Ceil(LevelManager.MapHeight / 2));
 
         if (isWall) return;
 
@@ -82,7 +82,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        pref.gameObject.SetActive(false);
+        pref.SetActive(false);
 
 
         if (isWall) return;

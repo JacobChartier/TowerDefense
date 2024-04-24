@@ -12,14 +12,14 @@ public abstract class Tower : Entity, ITowerBase
     private void Start()
     {
         Load();
-    }
+    } 
 
     protected virtual void Load()
     {
         Icon = Resources.Load<Sprite>("Sprites/default_tower");
     }
 
-    public float Attack()
+    public virtual float Attack()
     {
         throw new System.NotImplementedException();
     }
