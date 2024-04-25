@@ -14,7 +14,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private Color darkPathTileColor = new(0.8f, 0.8f, 0.3f, 1.0f);
     private Color lightPathTileColor = new(1.0f, 1.0f, 0.4f, 1.0f);
 
-    public bool isGray, isWall, isTower, isPath;
+    public bool isGray, isWall, isTowerSpawned, isPath;
 
     private Sprite wallSprite;
     private GameObject pref;
@@ -77,7 +77,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
         if (isWall) return;
 
-        GetComponent<SpriteRenderer>().color = Color.blue;
+        GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -95,22 +95,39 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        isWall = !isWall;
-
         Reset();
 
         if (eventData.button == PointerEventData.InputButton.Right)
+        {
             if (isWall)
-                GetComponent<SpriteRenderer>().color = Color.magenta;
+                isWall = false;
+
+            if (isTowerSpawned)
+            {
+                isTowerSpawned = false;
+                Destroy(transform.GetChild(0).gameObject);
+            }
+        }
 
         if (eventData.button == PointerEventData.InputButton.Left)
+        {
+
+            if (isWall && !isTowerSpawned)
+            {
+                Instantiate(Resources.Load<GameObject>("Prefabs/tower"), transform);
+                isTowerSpawned = true;
+            }
+
+            isWall = true;
+
             if (isWall)
             {
                 GetComponent<SpriteRenderer>().sprite = wallSprite;
                 GetComponent<SpriteRenderer>().color = Color.white;
             }
+        }
 
-        if (!isWall)
-            GetComponent<SpriteRenderer>().color = Color.blue;
+        //if (!isWall)
+        //    GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
     }
 }
