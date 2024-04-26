@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
             var path = GameObject.Find("Level Loader").GetComponent<TileManager>().PathFinding(spawnTile, TargetTile);
             var tile = TargetTile;
 
+            pathToGoal.Clear();
+
             while (tile != null)
             {
                 pathToGoal.Add(tile);

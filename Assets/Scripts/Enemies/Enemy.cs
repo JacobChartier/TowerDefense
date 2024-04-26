@@ -33,7 +33,10 @@ public abstract class Enemy : Entity
         }
         else
         {
+            Destroy(Instantiate(Resources.Load<GameObject>("Prefabs/die_particles"), gameObject.transform.localPosition, Quaternion.identity), 1);
             Destroy(this.gameObject);
         }
-    } 
+    }
+
+
 }

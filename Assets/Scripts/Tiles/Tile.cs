@@ -70,7 +70,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     {
         GameManager.Instance.TargetTile = this;
 
-        if (isWall)
+        if (isWall && !isTowerSpawned)
             pref.SetActive(true);
         pref.transform.SetParent(TileManager.Instance.tiles[X, Y].transform);
         pref.transform.position = new Vector2(X - Mathf.Ceil(LevelManager.MapWidth / 2), Y - Mathf.Ceil(LevelManager.MapHeight / 2));
