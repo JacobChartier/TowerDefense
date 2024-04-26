@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
                 tile.isPath = true;
                 tile = path[tile];
             }
+
+            StartCoroutine(EnnemySpawner.Spawn());
         }
     }
 

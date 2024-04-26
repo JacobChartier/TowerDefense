@@ -101,7 +101,7 @@ CircleCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 10
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 6393646039516000242}
   - component: {fileID: 318094096427904071}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: basic_enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
