@@ -9,5 +9,6 @@ public class BasicEnemy : Enemy
     private void Start()
     {
         Health = new(10, 10);
+
     }
 }
