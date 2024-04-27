@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class HeadUpDisplay : MonoBehaviour
 {
+    public static HeadUpDisplay Instance;
+
     [SerializeField] private TMP_Text levelLabel;
     [SerializeField] private Slider levelSlider;
 
@@ -20,29 +22,33 @@ public class HeadUpDisplay : MonoBehaviour
     [Space]
     [SerializeField] private TMP_Text coinsLabel;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
-        levelLabel.text = $"Level: {LevelManager.CurrentLevel}";
-        levelSlider.maxValue = 5;
-        levelSlider.value = LevelManager.CurrentLevel;
+        UpdateUIs();
 
-        waveLabel.text = $"Wave: {LevelManager.CurrentWave}";
-        waveSlider.maxValue = 20;
-        waveSlider.value = LevelManager.CurrentWave;
+        GameManager.Instance.pathToGoal = new();
+        gameObject.GetComponent<TileManager>().GenerateMap(LevelManager.MapWidth, LevelManager.MapHeight, new Vector2(0, -0.5f));
+    }
+
+    public void UpdateUIs()
+    {
+        levelLabel.text = $"Level: {(int)LevelManager.CurrentLevel}";
+        levelSlider.maxValue = 5;
+        levelSlider.value = (int)LevelManager.CurrentLevel;
+
+        waveLabel.text = $"Wave: {LevelManager.Wave.Current}";
+        waveSlider.maxValue = LevelManager.Wave.MaxValue;
+        waveSlider.value = LevelManager.Wave.Current;
 
         healthText.text = $"{Player.Instance.Health.Current}/{Player.Instance.Health.MaxValue} <color=#FF4343>HP</color>";
         healthSlider.maxValue = Player.Instance.Health.MaxValue;
         healthSlider.value = Player.Instance.Health.Current;
 
-        GameManager.Instance.pathToGoal = new();
-        gameObject.GetComponent<TileManager>().GenerateMap(LevelManager.MapWidth, LevelManager.MapHeight, new Vector2(0, -0.5f));
-
-        UpdateUIs();
-    }
-
-    public void UpdateUIs()
-    {
-        //GameObject.Find("Level").GetComponent<UIScaler>().UpdateUI();
-        //GameObject.Find("Health").GetComponent<UIScaler>().UpdateUI();
+        coinsLabel.text = $"{Player.Coins} <color=#FFD700>Coins</color>";
     }
 }

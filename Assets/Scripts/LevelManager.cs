@@ -8,8 +8,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
 
-    public static int CurrentLevel { get; private set; } = 0;
-    public static int CurrentWave { get; private set; } = 0;
+    public static Levels CurrentLevel { get; private set; } = 0;
+    public static Statistic<int> Wave = new(0, 20);
     public static int MapWidth { get; private set; } = 0;
     public static int MapHeight { get; private set; } = 0;
 
@@ -31,20 +31,22 @@ public class LevelManager : MonoBehaviour
         {
             case 0:
 
-                CurrentLevel = 0;
+                CurrentLevel = Levels.MAIN_MENU;
 
                 break;
 
             case 1:
-                CurrentLevel = 1;
+                CurrentLevel = Levels.LEVEL_1;
 
                 MapWidth = 17;
                 MapHeight = 8;
 
+                InitializeLevel(10);
+
                 break;
 
             case 2:
-                CurrentLevel = 2;
+                CurrentLevel = Levels.LEVEL_2;
 
                 MapWidth = 17;
                 MapHeight = 8;
@@ -52,7 +54,7 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case 3:
-                CurrentLevel = 3;
+                CurrentLevel = Levels.LEVEL_3;
 
                 MapWidth = 16;
                 MapHeight = 8;
@@ -60,7 +62,7 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case 4:
-                CurrentLevel = 4;
+                CurrentLevel = Levels.LEVEL_4;
 
                 MapWidth = 16;
                 MapHeight = 8;
@@ -68,7 +70,7 @@ public class LevelManager : MonoBehaviour
                 break;
 
             case 5:
-                CurrentLevel = 5;
+                CurrentLevel = Levels.LEVEL_5;
 
                 MapWidth = 15;
                 MapHeight = 7;
@@ -80,9 +82,17 @@ public class LevelManager : MonoBehaviour
         Player.posY = UnityEngine.Random.Range(0, MapHeight);
     }
 
-    public void StartWave()
+    public static void InitializeLevel(int waves)
     {
-        CurrentLevel += 1;
+        Wave.MaxValue = waves;
+        Wave.Current = 1;
+    }
+
+    public static void EndWave()
+    {
+        Wave.Current++;
+
+        Player.Coins += 10;
     }
 }
 

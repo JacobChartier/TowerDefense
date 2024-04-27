@@ -13,14 +13,18 @@ public class EnnemySpawner : MonoBehaviour
 
     public static IEnumerator Spawn()
     {
-        while (true)
+        while (LevelManager.Wave.Current != LevelManager.Wave.MaxValue)
         {
-            for (int i = 0; i < 5; i++)
+            var num = Random.Range(0, 16);
+
+            for (int i = 0; i < num; i++)
             {
-                yield return new WaitForSeconds(0.6f);
+                yield return new WaitForSeconds(0.5f);
                 var enemy = Instantiate(prefab, GameManager.Instance.spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(GameManager.Instance.pathToGoal);
             }
+
+            LevelManager.EndWave();
 
             yield return new WaitForSeconds(2f);
         }

@@ -21,13 +21,19 @@ public class GameManager : MonoBehaviour
     public Tile TargetTile { get; internal set; }
     public List<Tile> pathToGoal = new();
 
+    public List<System.Type> towers = new() { typeof(BasicTower), typeof(LaserTower), typeof(RangeTower) };
+
     private void Update()
     {
+        if (LevelManager.CurrentLevel == Levels.MAIN_MENU) return;
+
         if (spawnTile != TileManager.Instance.tiles[Player.posX, Player.posY])
             spawnTile = TileManager.Instance.tiles[Player.posX, Player.posY];
 
         if (Input.GetKeyUp(KeyCode.Space) && TargetTile != null)
         {
+            StopAllCoroutines();
+
             foreach (var t in GameObject.Find("Level Loader").GetComponent<TileManager>().tiles)
             {
                 if (t.isWall) continue;

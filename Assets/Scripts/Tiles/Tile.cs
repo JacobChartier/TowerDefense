@@ -14,15 +14,15 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
     private Color darkPathTileColor = new(0.8f, 0.8f, 0.3f, 1.0f);
     private Color lightPathTileColor = new(1.0f, 1.0f, 0.4f, 1.0f);
 
-    public bool isGray, isWall, isTowerSpawned, isPath;
+    public bool isGray, isWall, isTowerSpawned, isPath, isHovering;
 
     private Sprite wallSprite;
-    private GameObject pref;
+    private GameObject cursor;
 
     private void Start()
     {
         wallSprite = Resources.Load<Sprite>("Sprites/Wall");
-        pref = GameObject.Find("Tile Selector");
+        cursor = GameObject.Find("cursor_place_tower");
 
         if (isGray)
             GetComponent<SpriteRenderer>().color = darkTileColor;
@@ -32,6 +32,19 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     private void Update()
     {
+        if (isWall)
+        {
+            GetComponent<SpriteRenderer>().sprite = wallSprite;
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+        else
+        {
+            if (isGray && !isHovering)
+                GetComponent<SpriteRenderer>().color = darkTileColor;
+            else if (!isHovering)
+                GetComponent<SpriteRenderer>().color = lightTileColor;
+        }
+
         if (isPath)
         {
             if (isGray)
@@ -68,22 +81,22 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        ShowTowerCursor();
+
         GameManager.Instance.TargetTile = this;
 
-        if (isWall && !isTowerSpawned)
-            pref.SetActive(true);
-        pref.transform.SetParent(TileManager.Instance.tiles[X, Y].transform);
-        pref.transform.position = new Vector2(X - Mathf.Ceil(LevelManager.MapWidth / 2), Y - Mathf.Ceil(LevelManager.MapHeight / 2));
+        cursor.transform.SetParent(TileManager.Instance.tiles[X, Y].transform);
+        cursor.transform.position = new Vector2(X - Mathf.Ceil(LevelManager.MapWidth / 2), Y - Mathf.Ceil(LevelManager.MapHeight / 2));
 
         if (isWall) return;
 
+        isHovering = true;
         GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        pref.SetActive(false);
-
+        isHovering = false;
 
         if (isWall) return;
 
@@ -91,6 +104,8 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             GetComponent<SpriteRenderer>().color = darkTileColor;
         else
             GetComponent<SpriteRenderer>().color = lightTileColor;
+
+        ShowTowerCursor();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -99,35 +114,39 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            if (isWall)
-                isWall = false;
-
             if (isTowerSpawned)
             {
                 isTowerSpawned = false;
                 Destroy(transform.GetChild(0).gameObject);
             }
+
+            if (isWall)
+                isWall = false;
+
+            ShowTowerCursor();
         }
 
         if (eventData.button == PointerEventData.InputButton.Left)
         {
+            if (isPath) return;
 
             if (isWall && !isTowerSpawned)
             {
-                Instantiate(Resources.Load<GameObject>("Prefabs/tower"), transform);
+                var tower = Tower.Create<BasicTower>(transform);
                 isTowerSpawned = true;
             }
 
             isWall = true;
 
-            if (isWall)
-            {
-                GetComponent<SpriteRenderer>().sprite = wallSprite;
-                GetComponent<SpriteRenderer>().color = Color.white;
-            }
+            ShowTowerCursor();
         }
+    }
 
-        //if (!isWall)
-        //    GetComponent<SpriteRenderer>().color = new Color(1.0f, 1.0f, 1.0f, 0.25f);
+    private void ShowTowerCursor()
+    {
+        if (isWall && !isTowerSpawned)
+            cursor.SetActive(true);
+        else
+            cursor.SetActive(false);
     }
 }

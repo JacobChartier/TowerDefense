@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-internal interface ITowerBase
+public class RangeTower : Tower
 {
-    public abstract float Attack();
 }
