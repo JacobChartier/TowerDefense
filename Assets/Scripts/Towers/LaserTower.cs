@@ -41,6 +41,7 @@ public class LaserTower : Tower
     {
         Debug.Log($"Attacking <b>{Target}</b>");
         Target.GetComponent<Enemy>().Health.Current--;
+        Target.transform.localScale = new Vector2(Target.transform.localScale.x * 0.9f, Target.transform.localScale.x * 0.9f);
         CanAttack = false;
 
         lineRenderer.SetPosition(1, Target.transform.position);

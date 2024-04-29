@@ -6,7 +6,7 @@ using UnityEngine;
 public abstract class Enemy : Entity
 {
     public static HashSet<Enemy> Enemies = new();
-    public static List<System.Type> Types = new() { typeof(BasicEnemy), typeof(SpeedEnemy), typeof(HealerEnemy) };
+    public static List<System.Type> Types = new() { typeof(BasicEnemy), typeof(SpeedEnemy), typeof(HealerEnemy), typeof(PurpleEnemy), typeof(OrangeEnemy) };
 
     protected Stack<Tile> path = new();
     public Sprite Icon { get; protected set; } = null;
@@ -31,7 +31,7 @@ public abstract class Enemy : Entity
 
     protected void UpdateSize()
     {
-        float newSize = Mathf.Lerp(0.2f, 0.8f, (float)(Health.Current / Health.MaxValue));
+        float newSize = Mathf.Lerp(0.2f, 0.8f, Health.Current / Health.MaxValue * 0.9f);
         transform.localScale = new Vector3(newSize, newSize, newSize);
     }
 

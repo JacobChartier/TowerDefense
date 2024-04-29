@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
             for (int i = 0; i < num; i++)
             {
                 yield return new WaitForSeconds(0.5f);
-                var enemy = Enemy.Create(Enemy.GetRandom(typeof(BasicEnemy), typeof(HealerEnemy)), GameManager.Instance.spawnTile.transform.position, Quaternion.identity);
+                var enemy = Enemy.Create(Enemy.GetRandom(), GameManager.Instance.spawnTile.transform.position, Quaternion.identity);
                 enemy.GetComponent<Enemy>().SetPath(GameManager.Instance.pathToGoal);
 
                 enemies.Add(enemy);

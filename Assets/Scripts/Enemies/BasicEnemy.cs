@@ -13,14 +13,5 @@ public class BasicEnemy : Enemy
         GetComponentInChildren<SpriteRenderer>().color = new Color(0.0f, 1.0f, 0.744457f, 1.0f); // HEX: #40BEFF
 
         Health = new(3, 3);
-
-        UpdateSize();
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-
-        UpdateSize();
     }
 }
