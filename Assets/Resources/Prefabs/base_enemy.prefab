@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8218784228194428852}
   - component: {fileID: 1246422792776104099}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.3443396, b: 0.3443396, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2cf7d6377499d374683269193300eb3d, type: 3}
+  m_Color: {r: 1, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -129,9 +129,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6393646039516000242}
-  - component: {fileID: 318094096427904071}
   m_Layer: 0
-  m_Name: basic_enemy
+  m_Name: base_enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,24 +152,3 @@ Transform:
   - {fileID: 143828255617303675}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &318094096427904071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5662416534764832295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a01cf6dd2bd3f84fb0bb656bbba5c78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health:
-    Current: 10
-    MaxValue: 10
-  Defense:
-    Current: 2
-    MaxValue: 2
-  Speed:
-    Current: 1
-    MaxValue: 5

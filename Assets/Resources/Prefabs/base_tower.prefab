@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7059801660691713492}
   - component: {fileID: 6685243615174517174}
   m_Layer: 0
-  m_Name: Icon
+  m_Name: icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 437759f637caaa14da9655a9433cb586, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7298699079198664629}
   m_Layer: 0
-  m_Name: tower
+  m_Name: base_tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

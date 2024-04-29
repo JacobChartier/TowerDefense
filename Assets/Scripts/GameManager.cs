@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public int HealthBonus = 0;
+
     private void Awake()
     {
         if (Instance != null)
@@ -53,7 +55,7 @@ public class GameManager : MonoBehaviour
                 tile = path[tile];
             }
 
-            StartCoroutine(EnnemySpawner.Spawn());
+            StartCoroutine(EnemySpawner.Spawn());
         }
     }
 

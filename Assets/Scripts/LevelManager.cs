@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance;
 
     public static Levels CurrentLevel { get; private set; } = 0;
-    public static Statistic<int> Wave = new(0, 20);
+    [field: SerializeField] public static Statistic<int> Wave = new(0, 20);
     public static int MapWidth { get; private set; } = 0;
     public static int MapHeight { get; private set; } = 0;
 
@@ -30,7 +30,6 @@ public class LevelManager : MonoBehaviour
         switch (level)
         {
             case 0:
-
                 CurrentLevel = Levels.MAIN_MENU;
 
                 break;
@@ -41,7 +40,7 @@ public class LevelManager : MonoBehaviour
                 MapWidth = 17;
                 MapHeight = 8;
 
-                InitializeLevel(10);
+                InitializeLevel(3);
 
                 break;
 
@@ -51,6 +50,8 @@ public class LevelManager : MonoBehaviour
                 MapWidth = 17;
                 MapHeight = 8;
 
+                InitializeLevel(15);
+
                 break;
 
             case 3:
@@ -58,6 +59,8 @@ public class LevelManager : MonoBehaviour
 
                 MapWidth = 16;
                 MapHeight = 8;
+
+                InitializeLevel(20);
 
                 break;
 
@@ -67,6 +70,8 @@ public class LevelManager : MonoBehaviour
                 MapWidth = 16;
                 MapHeight = 8;
 
+                InitializeLevel(30);
+
                 break;
 
             case 5:
@@ -74,6 +79,8 @@ public class LevelManager : MonoBehaviour
 
                 MapWidth = 15;
                 MapHeight = 7;
+
+                InitializeLevel(50);
 
                 break;
         }
@@ -90,9 +97,15 @@ public class LevelManager : MonoBehaviour
 
     public static void EndWave()
     {
-        Wave.Current++;
+        Player.Coins += UnityEngine.Random.Range(1, 6);
 
-        Player.Coins += 10;
+        if (Wave.Current == Wave.MaxValue)
+        {
+            GameManager.Instance.StopAllCoroutines();
+            return;
+        }
+
+        Wave.Current++;
     }
 }
 

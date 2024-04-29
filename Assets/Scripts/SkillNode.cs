@@ -1,77 +1,78 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class SkillNode : MonoBehaviour
+public class SkillNode : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] private SkillNode parentNode;
-    [SerializeField] private LineRenderer lineRenderer;
 
     public NodeState state;
+    public List<SkillNode> children = new();
+
+    [SerializeField] private int healthBonus;
+
+    private void Awake()
+    {
+        if (parentNode != null)
+        parentNode.children.Add(this);
+    }
 
     private void Start()
     {
-        lineRenderer = GetComponent<LineRenderer>();
+        if (parentNode == null) 
+            SetState(NodeState.UNLOCKED);
+    }
 
-        if (parentNode != null)
-        {
-            lineRenderer.enabled = true;
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, parentNode.transform.position);
-        }
+    private void SetState(NodeState value)
+    {
+        state = value;
 
-        SetState();
-
-        switch (this.state)
+        switch (state)
         {
             case NodeState.OBTAINED:
-                this.GetComponentInChildren<SpriteRenderer>().color = new Color(0.035014f, 0.2830189f, 0.0f, 1.0f);
+                this.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0.035014f, 0.2830189f, 0.0f, 1.0f);
+
+                foreach (var child in children)
+                    child.SetState(NodeState.UNLOCKED);
+
                 break;
 
             case NodeState.UNLOCKED:
-                this.GetComponentInChildren<SpriteRenderer>().color = new Color(0.03921569f, 0.03921569f, 0.03921569f, 1.0f);
+                this.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0.03921569f, 0.03921569f, 0.03921569f, 1.0f);
+
+                foreach (var child in children)
+                    child.SetState(NodeState.LOCKED);
+
                 break;
 
             case NodeState.LOCKED:
-                this.GetComponentInChildren<SpriteRenderer>().color = new Color(0.2830189f, 0.0f, 0.0f, 1.0f);
+                this.GetComponentInChildren<UnityEngine.UI.Image>().color = new Color(0.2830189f, 0.0f, 0.0f, 1.0f);
+
+                foreach (var child in children)
+                    child.SetState(NodeState.LOCKED);
+
                 break;
         }
     }
 
-    private void SetState()
+    public void OnPointerDown(PointerEventData eventData)
     {
-        switch (parentNode.state)
+        if (eventData.button == PointerEventData.InputButton.Left && this.state == NodeState.UNLOCKED)
         {
-            case NodeState.OBTAINED:
-                state = NodeState.UNLOCKED;
-
-                lineRenderer.startColor = new Color(0.2f, 0.2f, 0.2f, 1.0f);
-                lineRenderer.endColor = new Color(0.3f, 0.3f, 0.3f, 1.0f);
-
-                break;
-
-            case NodeState.UNLOCKED:
-                state = NodeState.LOCKED;
-
-                lineRenderer.startColor = new Color(0.3113208f, 0.0f, 0.0f, 1.0f);
-                lineRenderer.endColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
-
-                break;
-
-            case NodeState.LOCKED:
-                state = NodeState.LOCKED;
-
-                lineRenderer.startColor = new Color(0.3113208f, 0.0f, 0.0f, 1.0f);
-                lineRenderer.endColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
-
-                break;
+            Player.Instance.Health = new(Player.Instance.Health.Current + healthBonus, Player.Instance.Health.Current + healthBonus);
+            GameManager.Instance.HealthBonus += healthBonus;
+            SetState(NodeState.OBTAINED);
         }
     }
 }
 
 public enum NodeState
 {
-    OBTAINED, 
-    UNLOCKED, 
+    OBTAINED,
+    UNLOCKED,
     LOCKED
 }

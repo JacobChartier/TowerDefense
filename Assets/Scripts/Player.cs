@@ -8,11 +8,13 @@ public class Player : Entity
     public static Player Instance;
     internal static int posX = 0, posY = 0;
 
-    public static int Coins { get; internal set; } = 0;
+    [field: SerializeField] public static int Coins { get; internal set; } = 0;
 
     private void Awake()
     {
         Instance = this;
+
+        Health = new(10 + GameManager.Instance.HealthBonus, 10 + GameManager.Instance.HealthBonus);
     }
 
     public static void Spawn()

@@ -117,7 +117,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
             if (isTowerSpawned)
             {
                 isTowerSpawned = false;
-                Destroy(transform.GetChild(0).gameObject);
+                Tower.Destroy(GetComponentInChildren<Tower>(true));
             }
 
             if (isWall)
@@ -132,7 +132,7 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IP
 
             if (isWall && !isTowerSpawned)
             {
-                var tower = Tower.Create<BasicTower>(transform);
+                var tower = Tower.Create<LaserTower>(transform);
                 isTowerSpawned = true;
             }
 

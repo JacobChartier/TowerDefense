@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 public class BasicEnemy : Enemy
 {
-    private void Start()
+    protected override void Load()
     {
-        Health = new(10, 10);
+        Icon = Resources.Load<Sprite>("Sprites/basic_enemy");
+        GetComponentInChildren<SpriteRenderer>().color = new Color(0.0f, 1.0f, 0.744457f, 1.0f); // HEX: #40BEFF
 
+        Health = new(3, 3);
+
+        UpdateSize();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        UpdateSize();
     }
 }
