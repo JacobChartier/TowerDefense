@@ -40,7 +40,7 @@ public class LevelManager : MonoBehaviour
                 MapWidth = 17;
                 MapHeight = 8;
 
-                InitializeLevel(3);
+                InitializeLevel(5);
 
                 break;
 
